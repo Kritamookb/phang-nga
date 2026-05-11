@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมัครแข่งขัน Phang Nga Open 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-dark: #0f2d6e;
+      --blue-mid:  #1a56b0;
+      --blue-sky:  #0ea5e9;
+      --orange:    #f97316;
+      --yellow:    #fbbf24;
+      --white:     #ffffff;
+      --gray-50:   #f8fafc;
+      --gray-100:  #f1f5f9;
+      --gray-200:  #e2e8f0;
+      --gray-400:  #94a3b8;
+      --gray-600:  #475569;
+      --gray-900:  #0f172a;
+      --green:     #16a34a;
+      --red:       #dc2626;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.12);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.12);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,.14);
+      --radius:    12px;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: linear-gradient(160deg, #0f2d6e 0%, #1a56b0 40%, #0ea5e9 100%);
+      min-height: 100vh;
+      color: var(--gray-900);
+    }
+
+    /* ─── Hero ─────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 32px;
+      color: var(--white);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: .5px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+    .hero h1 span { color: var(--yellow); }
+    .hero-sub {
+      margin-top: 10px;
+      font-size: 16px;
+      opacity: .9;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 6px 14px;
+    }
+    .deadline-banner {
+      background: linear-gradient(90deg, var(--orange), #ef4444);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .3px;
+    }
+
+    /* ─── Container ────────────────────────────── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ─── Card ──────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .step-badge {
+      width: 26px; height: 26px;
+      background: var(--blue-mid);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Category Cards ────────────────────────── */
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 400px) {
+      .category-grid { grid-template-columns: 1fr; }
+    }
+    .category-card input[type="radio"] { display: none; }
+    .category-card label {
+      display: block;
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all .15s;
+      position: relative;
+    }
+    .category-card input:checked + label {
+      border-color: var(--blue-mid);
+      background: #eff6ff;
+      box-shadow: 0 0 0 1px var(--blue-mid);
+    }
+    .category-card label:hover {
+      border-color: var(--blue-sky);
+    }
+    .cat-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue-dark);
+    }
+    .cat-limit {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+    .cat-prize-first {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+    .cat-prize-first small { font-size: 12px; font-weight: 400; color: var(--gray-600); }
+    .cat-prizes-rest {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .cat-prize-pill {
+      font-size: 11px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+    .cat-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 10px;
+      background: #fef9c3;
+      color: #92400e;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-weight: 600;
+    }
+    .cat-check {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 20px; height: 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      color: transparent;
+      background: var(--white);
+      transition: all .15s;
+    }
+    .category-card input:checked + label .cat-check {
+      border-color: var(--blue-mid);
+      background: var(--blue-mid);
+      color: var(--white);
+    }
+
+    /* ─── Form Fields ──────────────────────────── */
+    .player-section + .player-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .player-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-mid);
+      margin-bottom: 12px;
+    }
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+    }
+    .field label .required { color: var(--red); margin-left: 2px; }
+    .field input {
+      width: 100%;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-family: 'Sarabun', sans-serif;
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+      color: var(--gray-900);
+      background: var(--gray-50);
+    }
+    .field input:focus {
+      border-color: var(--blue-mid);
+      box-shadow: 0 0 0 3px rgba(26,86,176,.12);
+      background: var(--white);
+    }
+    .field input.error { border-color: var(--red); background: #fef2f2; }
+    .field-error { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+
+    /* ─── Submit ────────────────────────────────── */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Sarabun', sans-serif;
+      color: var(--white);
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-sky));
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity .15s, transform .1s;
+      letter-spacing: .3px;
+    }
+    .btn-submit:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    /* ─── Success Screen ────────────────────────── */
+    #success-screen {
+      display: none;
+      text-align: center;
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #bbf7d0, #4ade80);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+    .success-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+    /* ─── Contact Footer ────────────────────────── */
+    .contact-card {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 16px;
+      color: var(--white);
+      text-align: center;
+    }
+    .contact-card h3 { font-size: 14px; font-weight: 700; opacity: .8; margin-bottom: 10px; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* ─── Spinner ──────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<!-- ─── Hero ─────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-badge">🏸 แบดมินตัน</div>
+  <h1>Phang Nga Open<br/><span>พังงา โอเพ่น 2026</span></h1>
+  <div class="hero-sub">ขอเชิญร่วมแข่งขันแบดมินตัน</div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">📅 23–24 พฤษภาคม 2569</div>
+    <div class="hero-meta-item">📍 สนามชมรมแบดมินตันจังหวัดพังงา</div>
+  </div>
+</div>
+
+<div class="deadline-banner">⚠️ ปิดรับสมัคร 15 พฤษภาคม 2569</div>
+
+<div class="container">
+
+  <!-- ─── FORM ──────────────────────────────────── -->
+  <form id="reg-form" novalidate>
+
+    <!-- Step 1: Category -->
+    <div class="card">
+      <div class="card-title">
+        <div class="step-badge">1</div>
+        เลือกประเภทการแข่งขัน
+      </div>
+      <div class="category-grid" id="category-grid">
+
+        <div class="category-card">
+          <input type="radio" name="category" id="cat-bg" value="BG" />
+          <label for="cat-bg">
+            <div class="cat-check">✓</div>
+            <div class="cat-name">BG</div>
+            <div class="cat-limit">จำกัด 32 คู่</div>
+            <div class="cat-prize-first">฿8,000 <small>ชนะเลิศ</small></div>
+            <div class="cat-prizes-rest">
+              <span class="cat-prize-pill">รอง ฿4,000</span>
+              <span class="cat-prize-pill">3rd ฿2,500</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="category-card">
+          <input type="radio" name="category" id="cat-tito" value="TITO" />
+          <label for="cat-tito">
+            <div class="cat-check">✓</div>
+            <div class="cat-name">TITO</div>
+            <div class="cat-limit">จำกัด 32 คู่</div>
+            <div class="cat-prize-first">฿10,000 <small>ชนะเลิศ</small></div>
+            <div class="cat-prizes-rest">
+              <span class="cat-prize-pill">รอง ฿6,000</span>
+              <span class="cat-prize-pill">3rd ฿3,000</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="category-card">
+          <input type="radio" name="category" id="cat-ns" value="NS" />
+          <label for="cat-ns">
+            <div class="cat-check">✓</div>
+            <div class="cat-name">NS</div>
+            <div class="cat-limit">จำกัด 48 คู่</div>
+            <div class="cat-prize-first">฿13,000 <small>ชนะเลิศ</small></div>
+            <div class="cat-prizes-rest">
+              <span class="cat-prize-pill">รอง ฿8,000</span>
+              <span class="cat-prize-pill">3rd ฿4,000</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="category-card">
+          <input type="radio" name="category" id="cat-s" value="S" />
+          <label for="cat-s">
+            <div class="cat-check">✓</div>
+            <div class="cat-name">S</div>
+            <div class="cat-limit">จำกัด 16 คู่</div>
+            <div class="cat-prize-first">฿10,000 <small>ชนะเลิศ</small></div>
+            <div class="cat-prizes-rest">
+              <span class="cat-prize-pill">รอง ฿6,000</span>
+              <span class="cat-prize-pill">3rd ฿3,000</span>
+            </div>
+          </label>
+        </div>
+
+      </div>
+      <div class="field-error" id="category-error" style="display:none; margin-top:10px;">
+        กรุณาเลือกประเภทการแข่งขัน
+      </div>
+    </div>
+
+    <!-- Step 2: Players -->
+    <div class="card">
+      <div class="card-title">
+        <div class="step-badge">2</div>
+        ข้อมูลนักกีฬา
+      </div>
+
+      <div class="player-section">
+        <div class="player-label">👤 ผู้เล่นที่ 1</div>
+        <div class="field">
+          <label for="p1-name">ชื่อ–นามสกุล <span class="required">*</span></label>
+          <input type="text" id="p1-name" name="p1_name" placeholder="เช่น สมชาย ใจดี" autocomplete="name" />
+          <div class="field-error" id="p1-name-error">กรุณากรอกชื่อ–นามสกุล</div>
+        </div>
+        <div class="field">
+          <label for="p1-phone">เบอร์โทรศัพท์ <span class="required">*</span></label>
+          <input type="tel" id="p1-phone" name="p1_phone" placeholder="0xx-xxx-xxxx" autocomplete="tel" maxlength="12" />
+          <div class="field-error" id="p1-phone-error">กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</div>
+        </div>
+      </div>
+
+      <div class="player-section">
+        <div class="player-label">👤 ผู้เล่นที่ 2</div>
+        <div class="field">
+          <label for="p2-name">ชื่อ–นามสกุล <span class="required">*</span></label>
+          <input type="text" id="p2-name" name="p2_name" placeholder="เช่น สมหญิง รักกีฬา" autocomplete="off" />
+          <div class="field-error" id="p2-name-error">กรุณากรอกชื่อ–นามสกุล</div>
+        </div>
+        <div class="field">
+          <label for="p2-phone">เบอร์โทรศัพท์ <span class="required">*</span></label>
+          <input type="tel" id="p2-phone" name="p2_phone" placeholder="0xx-xxx-xxxx" autocomplete="off" maxlength="12" />
+          <div class="field-error" id="p2-phone-error">กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit" id="submit-btn">
+      ยืนยันการสมัคร
+    </button>
+
+  </form>
+
+  <!-- ─── SUCCESS ─────────────────────────────── -->
+  <div id="success-screen">
+    <div class="card" style="padding: 36px 24px;">
+      <div class="success-icon">✓</div>
+      <div class="success-title">ส่งใบสมัครเรียบร้อยแล้ว!</div>
+      <p style="color:var(--gray-600); font-size:14px; margin-bottom:4px;">
+        ระบบได้รับข้อมูลของท่านเรียบร้อยแล้ว
+      </p>
+      <div id="success-summary" style="margin-top:16px; padding:14px; background:var(--gray-50); border-radius:8px; font-size:14px; text-align:left; line-height:1.8;"></div>
+      <button onclick="resetForm()" style="margin-top:20px; width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--gray-200); background:var(--white); font-size:14px; font-family:'Sarabun',sans-serif; cursor:pointer; font-weight:600; color:var(--blue-mid);">
+        ← สมัครคู่ใหม่
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── CONTACT ──────────────────────────────── -->
+  <div class="contact-card">
+    <h3>ประสานงานจัดการแข่งขัน</h3>
+    <div class="contact-links">
+      <a class="contact-link" href="tel:0954129997">📞 095-412-9997</a>
+      <a class="contact-link" href="https://line.me/ti/p/~686zhvzr" target="_blank">💬 LINE @686zhvzr</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzRQY3skLREChCsHPC6MTr3eI0Le-MjOfyNKQQYbLFz__kRsgish7di4_tgB_TP3vwwdg/exec';
+  // ─── Validation ──────────────────────────────────
+  function validatePhone(v) { return /^0[0-9]{8,9}$/.test(v.replace(/[-\s]/g, '')); }
+  function showError(id, show) {
+    const el = document.getElementById(id);
+    el.style.display = show ? 'block' : 'none';
+  }
+  function setFieldError(inputId, errorId, hasError) {
+    document.getElementById(inputId).classList.toggle('error', hasError);
+    showError(errorId, hasError);
+    return !hasError;
+  }
+
+  function validate() {
+    let ok = true;
+    const cat = document.querySelector('input[name="category"]:checked');
+    if (!cat) { showError('category-error', true); ok = false; }
+    else showError('category-error', false);
+    const p1n = document.getElementById('p1-name').value.trim();
+    ok = setFieldError('p1-name', 'p1-name-error', !p1n) && ok;
+    const p1p = document.getElementById('p1-phone').value.trim();
+    ok = setFieldError('p1-phone', 'p1-phone-error', !validatePhone(p1p)) && ok;
+    const p2n = document.getElementById('p2-name').value.trim();
+    ok = setFieldError('p2-name', 'p2-name-error', !p2n) && ok;
+    const p2p = document.getElementById('p2-phone').value.trim();
+    ok = setFieldError('p2-phone', 'p2-phone-error', !validatePhone(p2p)) && ok;
+    return ok;
+  }
+
+  // ─── Form submit ─────────────────────────────────
+  document.getElementById('reg-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>กำลังส่งข้อมูล…';
+
+    const payload = {
+      category: document.querySelector('input[name="category"]:checked').value,
+      p1_name:  document.getElementById('p1-name').value.trim(),
+      p1_phone: document.getElementById('p1-phone').value.trim(),
+      p2_name:  document.getElementById('p2-name').value.trim(),
+      p2_phone: document.getElementById('p2-phone').value.trim(),
+    };
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload),
+      });
+    } catch (_) {}
+
+    showSuccess(payload);
+  });
+
+  function showSuccess(data) {
+    document.getElementById('reg-form').style.display = 'none';
+    const s = document.getElementById('success-screen');
+    s.style.display = 'block';
+    document.getElementById('success-summary').innerHTML =
+      `<b>ประเภท:</b> ${data.category}<br/>` +
+      `<b>ผู้เล่นที่ 1:</b> ${data.p1_name} (${data.p1_phone})<br/>` +
+      `<b>ผู้เล่นที่ 2:</b> ${data.p2_name} (${data.p2_phone})`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    document.getElementById('reg-form').reset();
+    document.getElementById('reg-form').style.display = '';
+    document.getElementById('success-screen').style.display = 'none';
+    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    document.querySelectorAll('.field-error').forEach(el => el.style.display = 'none');
+    showError('category-error', false);
+    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('submit-btn').textContent = 'ยืนยันการสมัคร';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Live validation on blur
+  ['p1-name','p1-phone','p2-name','p2-phone'].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener('blur', () => {
+      if (id.includes('phone')) {
+        setFieldError(id, id + '-error', !validatePhone(input.value.trim()));
+      } else {
+        setFieldError(id, id + '-error', !input.value.trim());
+      }
+    });
+    input.addEventListener('input', () => input.classList.remove('error'));
+  });
+</script>
+</body>
+</html>
